@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GameSnake.UserServices;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,8 @@ namespace GameSnake.UI
 {
     class UIService
     {
+        private UserService _userServices = new UserService();
+
         public void GetMenu()
         {
             GraphicMenu();
@@ -45,7 +48,7 @@ namespace GameSnake.UI
             Console.SetCursorPosition(44, 18);
             Console.WriteLine("- Press S to Get all Scores");
             Console.SetCursorPosition(44, 20);
-            Console.WriteLine("- Press ESC to Quite th Game");
+            Console.WriteLine("- Press ESC to Quite the Game");
 
             Console.SetCursorPosition(32, 22);
             Console.WriteLine(new string('=', 55));
@@ -83,7 +86,22 @@ namespace GameSnake.UI
         private void CreateUserForms()
         {
             Console.Clear();
-            throw new NotImplementedException();
+            IEnumerable<User> users = _userServices.GetAllUsers();
+            foreach (User user in users)
+            {
+                Console.WriteLine($"User: {user.Name} with Score: {user.Score};");
+            }
+
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Press ESC to back");
+            Console.ResetColor();
+
+            ConsoleKeyInfo key = Console.ReadKey();
+            if (key.Key == ConsoleKey.Escape)
+                GetMenu();
+            else
+                CreateUserForms();
         }
 
         private void ScoreBoard()
