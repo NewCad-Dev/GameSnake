@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="Enums\DirectionEnum.cs" />
     <Compile Include="Factory\FoodFactory.cs" />
+    <Compile Include="StartAndGameOver.cs" />
     <Compile Include="GamePlay.cs" />
     <Compile Include="Helpers\ColorHelper.cs" />
     <Compile Include="Helpers\ScoreHelper.cs" />

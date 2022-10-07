@@ -28,7 +28,12 @@ namespace GameSnake
             while (true)
             {
                 if (lineInstaller.Collision(snake) || snake.CollisionWithOnTail())
+                {
+                    Console.Clear();
+                    StartAndGameOver gameOver = new StartAndGameOver();
+                    gameOver.GameOver();
                     break;
+                }
 
                 if (snake.Eat(food))
                 {
