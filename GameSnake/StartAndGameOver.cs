@@ -5,8 +5,11 @@ namespace GameSnake
 {
     class StartAndGameOver
     {
+        UIService uiService = new UIService();
+
         public void StartGame()
         {
+            Console.Clear();
             Collor();
             Console.WriteLine(@"
                                    _____ __             __     ______                   
@@ -16,9 +19,12 @@ namespace GameSnake
                                 /____/\__/\__,_/_/   \__/   \____/\__,_/_/ /_/ /_/\___/");
             Console.ResetColor();
             Console.SetCursorPosition(45, 18);
-            Console.WriteLine("Press any key to Start the Game");
-            ConsoleKey key = Key();
-            GetCommand(key);
+            Console.WriteLine("Press Enter to Start the Game");
+            ConsoleKeyInfo key = Console.ReadKey();
+            if (key.Key == ConsoleKey.Enter)
+                uiService.GetMenu();
+            else
+                StartGame();
         }
 
         public void GameOver()
@@ -49,26 +55,11 @@ namespace GameSnake
             switch (key)
             {
                 case ConsoleKey.Escape:
-                    UIService uiService = new UIService();
                     uiService.GetMenu();
                     break;
                 default:
                     GameOver();
                     break;
-            }
-        }
-
-        private ConsoleKey Key()
-        {
-            while (true)
-            {
-                ConsoleKeyInfo key = Console.ReadKey();
-                if (key.Key == ConsoleKey.Enter)
-                    return ConsoleKey.Enter;
-                else if (key.Key == ConsoleKey.Escape)
-                    return ConsoleKey.Escape;
-                else
-                    return ConsoleKey.Clear;
             }
         }
     }
