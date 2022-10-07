@@ -9,6 +9,7 @@ namespace GameSnake.UI
 {
     class UIService
     {
+        private UIService test = null;
         private UserService _userServices = new UserService();
 
         public void GetMenu()
@@ -86,12 +87,31 @@ namespace GameSnake.UI
         private void CreateUserForms()
         {
             Console.Clear();
+            Console.WriteLine("Create User:");
+
+            Console.Write("Enter your name please: ");
+            string nameUser = Console.ReadLine();
+            _userServices.CreateUser(nameUser);
+
+            Console.WriteLine("The user was saved");
+
+            GoBack();
+        }
+
+        private void ScoreBoard()
+        {
+            Console.Clear();
             IEnumerable<User> users = _userServices.GetAllUsers();
             foreach (User user in users)
             {
                 Console.WriteLine($"User: {user.Name} with Score: {user.Score};");
             }
 
+            GoBack();
+        }
+
+        private void GoBack()
+        {
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Press ESC to back");
@@ -101,13 +121,7 @@ namespace GameSnake.UI
             if (key.Key == ConsoleKey.Escape)
                 GetMenu();
             else
-                CreateUserForms();
-        }
-
-        private void ScoreBoard()
-        {
-            Console.Clear();
-            throw new NotImplementedException();
+                GoBack();
         }
     }
 }

@@ -19,5 +19,15 @@ namespace GameSnake.UserServices
         {
             return _users.OrderByDescending(x => x.Score);
         }
+
+        public User CreateUser(string name)
+        {
+            User user = new User();
+            user.Name = name;
+
+            _users.Add(user);
+
+            return user;
+        }
     }
 }
