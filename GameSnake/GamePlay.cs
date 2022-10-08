@@ -2,6 +2,7 @@
 using GameSnake.Factory;
 using GameSnake.Helpers;
 using GameSnake.Installers;
+using GameSnake.UserServices;
 using System;
 using System.Threading;
 
@@ -9,8 +10,13 @@ namespace GameSnake
 {
     class GamePlay
     {
-        public void StartGame()
+        UserService _userService = new UserService();
+
+        public void StartGame(User user)
         {
+            if (user == null)
+                user = new User();
+
             int score = 0;
 
             LineInstaller lineInstaller = new LineInstaller();
@@ -53,6 +59,9 @@ namespace GameSnake
                     snake.PressKey(key.Key);
                 }
             }
+
+            user.Score = score;
+            _userService.SaveScore(user);
         }
 
         private void Food(Point point)

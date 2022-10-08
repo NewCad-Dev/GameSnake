@@ -1,16 +1,13 @@
 ﻿using GameSnake.UserServices;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GameSnake.UI
 {
     class UIService
     {
-        private UIService test = null;
         private UserService _userServices = new UserService();
+        private User _user = new User();
 
         public void GetMenu()
         {
@@ -81,7 +78,7 @@ namespace GameSnake.UI
         {
             Console.Clear();
             GamePlay play = new GamePlay();
-            play.StartGame();
+            play.StartGame(_user);
         }
 
         private void CreateUserForms()
@@ -89,9 +86,20 @@ namespace GameSnake.UI
             Console.Clear();
             Console.WriteLine("Create User:");
 
+            Create:
             Console.Write("Enter your name please: ");
             string nameUser = Console.ReadLine();
-            _userServices.CreateUser(nameUser);
+
+            try
+            {
+                _user = _userServices.CreateUser(nameUser);
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex.Message);
+                goto Create;
+            }
 
             Console.WriteLine("The user was saved");
 

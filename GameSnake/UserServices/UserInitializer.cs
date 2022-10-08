@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace GameSnake.UserServices
 {
@@ -12,9 +8,8 @@ namespace GameSnake.UserServices
         {
             List<User> users = new List<User>();
 
-            users.Add(new User { Name = "Same Name", Score = 123 });
-            users.Add(new User { Name = "Same Name2", Score = 124 });
-            users.Add(new User { Name = "Same Name", Score = 3 });
+            users.Add(new User { Name = "Professional User", Score = 250 });
+            users.Add(new User { Name = "Test User", Score = 124 });
 
             return users;
         }
